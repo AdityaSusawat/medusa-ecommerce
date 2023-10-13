@@ -28,28 +28,23 @@
             Best Qualities You Can Trust
         </div>
     </div>
-    <div class="max-w-12xl mx-auto h-full flex flex-wrap justify-center py-28 gap-10">
-        {#each products?.products as product, i}
-            <div class="">
-                <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a
-                        href={`/products/${product?.id}`}
-                        data-mdb-ripple="true"
-                        data-sveltekit-prefetch
-                        data-mdb-ripple-color="light"
-                    >
-                        <img class="rounded-t-lg" src={product?.thumbnail} alt="" />
+    <div class="mx-auto h-full flex flex-wrap justify-center py-28 gap-10">
+        {#if products}
+            {#each products?.products as product, i}
+            <div class="transform hover:scale-110 transition-transform cursor-pointer border-[1px] border-black hover:border-[#CFFA00]">
+                    
+                    <img class="w-[384px] h-[250px]" src={product.thumbnail} alt="" />
+                    
+                    <a href={`/products/${product.id}`} data-mdb-ripple="true" data-sveltekit-prefetch data-mdb-ripple-color="light" class=" z-[0] h-full w-full absolute top-0 opacity-0 hover:opacity-100 hover:bg-opacity-20 transition-opacity duration-300">
+                        <div class="absolute bottom-0  bg-[#CFFA00] py-4 font-boldtext-[#6A7F00] text-xl w-full flex flex-col justify-center px-6">
+                            <div class="">{product.title}</div>
+                            <div class="">
+                                &#8377; {product.variants[0].prices[0].amount / 100}
+                            </div>
+                        </div>						
                     </a>
-                    <div class="bg-red-400 py-8 relative font-bold text-gray-100 text-xl w-full flex flex-col justify-center px-6">
-                        <div class="">
-                            {product?.title}
-                        </div>
-                        <div class="">
-                            &#8377; {product?.variants[0]?.prices[0]?.amount / 100}
-                        </div>
-                    </div>
-                </div>
             </div>
-        {/each}
-    </div>
+            {/each}
+        {/if}
+	</div>
 </div>

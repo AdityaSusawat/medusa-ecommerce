@@ -160,7 +160,7 @@
                     <div class="font-bold text-md text-black">Price</div>
 
                         {#if responseData?.product?.variants}
-                            <div class="text-black">&#8377;{responseData?.product?.variants.map(x => x.prices[0]?.amount)[0]}</div>
+                            <div class="text-black">&#8377;{responseData?.product?.variants.map(x => x.prices[0]?.amount)[0]/100}</div>
                         {/if}
 
                 </div>
@@ -179,6 +179,7 @@
                 } else {
                 addProduct(variantsId);
                 }
+                console.log("Add to cart button pressed");
             }}
         >
             Add to Cart
