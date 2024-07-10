@@ -8,7 +8,7 @@
 </script>
   
 <div class="">
-    <div class="fixed z-50 bg-white topNav w-full top-0 p-3">
+    <div class="relative z-50 bg-white topNav w-full top-0 p-3">
         <div class="max-w-6xl relative flex mx-auto flex-col md:flex-row">
             <a href="#/" class="md:hidden absolute top-1 right-14">
                 <div class="relative">

@@ -1,6 +1,7 @@
 <script>
 	//@ts-nocheck
 
+	import PostList from "../components/PostList.svelte";
 	import Footer from "../components/Footer.svelte";
 	import "../app.css";
 	import Navbar from "../components/Navbar.svelte";
@@ -118,97 +119,133 @@
 </script>
 
 <style>
-		body {
-			height: 100vh;
-  			width: 100vw;
-			margin: 0rem;
-			overflow: hidden;
-		}
-        .scrolling-container {
-            white-space: nowrap; /* Prevent text from wrapping */
-            overflow: hidden;    /* Hide overflowing content */
-        }
-        .scrolling-content {
-            display: inline-block; /* Make the content inline so it scrolls horizontally */
-            animation: marquee 18s linear infinite; /* Add an animation for scrolling */
-        }
-        @keyframes marquee {
-            0% {
-                transform: translateX(150%); /* Start offscreen to the right */
-            }
-            100% {
-                transform: translateX(-100%); /* End offscreen to the left */
-            }
-        }
 
-		#image-track {
-			display: flex;
-			gap: 4vmin;
-			position: relative;
-			left: 50%;
-			right: 50%;
-			transform: translate(0%, -50%);
-			width: max-content;
-			user-select: none;
+	body {
+		height: 100vh;
+		width: 100vw;
+		margin: 0rem;
+		overflow-x: hidden;
+	}
+
+	.scrolling-container {
+		white-space: nowrap; /* Prevent text from wrapping */
+		overflow: hidden;    /* Hide overflowing content */
+	}
+	.scrolling-content {
+		display: inline-block; /* Make the content inline so it scrolls horizontally */
+		animation: marquee 18s linear infinite; /* Add an animation for scrolling */
+	}
+	@keyframes marquee {
+		0% {
+			transform: translateX(150%); /* Start offscreen to the right */
+		}
+		100% {
+			transform: translateX(-100%); /* End offscreen to the left */
+		}
+	}
+
+	.btn {
+		/* transition-property: transform;
+		transition-duration: 0.5s;
+		transition-timing-function: ease;
+		transition-delay: 0s; */
+
+		transition: transform 0.5s ease 0s, background-color 0.5s, color 0.5s; /* transition: all 0.5s; works as well*/
+	}
+	.btn:hover {
+		transform: translateY(-10px);
+		background-color: aqua;
+		color: aliceblue;
+	}
+
+	@keyframes slideInLeft {
+		from {
+			transform: translate(-300px, -200px);
+
 		}
 
-		#image-track > .image {
-			width: 40vmin;
-			height: 56vmin;
-			object-fit: cover; /* aspect ratio fix */
-			object-position: 0% center;
+		to {
+			transform: translate(0px);
 		}
+	}
+	.slide-text {
+		animation-name: slideInLeft;
+		animation-duration: 1s;
+		animation-timing-function: ease-in;
+		animation-delay: 0s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+		animation-fill-mode: none;
+	}
+
+
+	#image-track {
+		display: flex;
+		gap: 4vmin;
+		left: 50%;
+		top: 35%;
+		transform: translate(0%, -50%);
+		width: max-content;
+		user-select: none;
+	}
+	#image-track > .image {
+		width: 40vmin;
+		height: 56vmin;
+		object-fit: cover; /* aspect ratio fix */
+		object-position: 0% center;
+	}
 		
 </style>
   
-<body class="bg-gray-100">
+<body class=" bg-gray-100">
 
-	<div>
+	<div class="relative">
 		<Navbar />
 	</div>
-
-	<div class="pt-0 max-h-full flex flex-col">
 		
-		<div class="pt-[52px]">
-        	<div class="scrolling-container bg-[#CFFA00] py-2 border-t-[1px] border-b-[1px] border-black">
-            	<span class="scrolling-content text-[#6A7F00] font-bold"> The Fall Winter 2023 collection has arrived. Discover the latest styles and trends from X|S.         //       FREE SHIPPING &amp; EXPRESS DELIVERY ON ALL ORDERS  </span>
-        	</div>
-    	</div>
-
-	  	<div class="flex mt-4">
-			<div class="flex-grow text-4xl font-bold text-center">
-		  		Checkout our premium collection
-			</div>
-	  	</div>
-		
-		<div class="flex transform hover:scale-105 transition-transform">
-			<div class="flex-grow text-4xl mt-12 font-extrabold text-center">
-				<a
-					href="/products"
-					class="bg-[#CFFA00] text-[#6A7F00] font-bold py-2 px-4 rounded "
-					>Products</a
-				>
-			</div>
-	  	</div>
-
-		<div class="mt-[350px]" id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="1" src="https://images.unsplash.com/photo-1695755656490-74ddf32eeff5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="2" src="https://images.unsplash.com/photo-1696392322523-37379e6808ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="3" src="https://images.unsplash.com/photo-1501002138038-06806ed23bce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="4" src="https://images.unsplash.com/photo-1684323750753-ddeb888f825a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="5" src="https://images.unsplash.com/photo-1668846538884-fc29cda36651?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2646&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="6" src="https://images.unsplash.com/photo-1696202752800-e4771f9402a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="7" src="https://images.unsplash.com/photo-1490031781863-29b9bdbea131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="8" src="https://images.unsplash.com/photo-1490427712608-588e68359dbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="9" src="https://images.unsplash.com/photo-1678801869049-15d5cb7dfff9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="10" src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="11" src="https://images.unsplash.com/photo-1681554437813-efc656499bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="12" src="https://images.unsplash.com/photo-1459201062043-6f30fd792f08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" draggable="false" />
-			<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="13" src="https://images.unsplash.com/photo-1691783592401-1b604f0449c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
-		</div>
+	<div class="scrolling-container relative bg-[#CFFA00] py-2 border-t-[1px] border-b-[1px] border-black">
+		<span class="scrolling-content text-[#6A7F00] font-bold"> The Fall Winter 2023 collection has arrived. Discover the latest styles and trends from X|S.         //       FREE SHIPPING &amp; EXPRESS DELIVERY ON ALL ORDERS  </span>
 	</div>
 
-	<div>
+	<div class="relative mt-4">
+		<div class="slide-text flex-grow text-4xl font-bold text-center">
+			Checkout our premium collection
+		</div>
+	</div>
+	
+
+	<div class="relative flex-grow text-4xl mt-12 font-extrabold text-center">
+		<a
+		href="/products"
+		class="btn bg-[#CFFA00] text-[#6A7F00] font-bold py-2 px-4 rounded "
+		>
+			Products
+		</a>
+	</div>
+
+	<div class="relative" id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="1" src="https://images.unsplash.com/photo-1695755656490-74ddf32eeff5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="2" src="https://images.unsplash.com/photo-1696392322523-37379e6808ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="3" src="https://images.unsplash.com/photo-1501002138038-06806ed23bce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="4" src="https://images.unsplash.com/photo-1684323750753-ddeb888f825a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="5" src="https://images.unsplash.com/photo-1668846538884-fc29cda36651?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2646&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="6" src="https://images.unsplash.com/photo-1696202752800-e4771f9402a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="7" src="https://images.unsplash.com/photo-1490031781863-29b9bdbea131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="8" src="https://images.unsplash.com/photo-1490427712608-588e68359dbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="9" src="https://images.unsplash.com/photo-1678801869049-15d5cb7dfff9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="10" src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="11" src="https://images.unsplash.com/photo-1681554437813-efc656499bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="12" src="https://images.unsplash.com/photo-1459201062043-6f30fd792f08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" draggable="false" />
+		<img class="image border-black hover:border-[#CFFA00] border-[1px]" alt="13" src="https://images.unsplash.com/photo-1691783592401-1b604f0449c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" draggable="false" />
+	</div>
+	
+	<div class="relative z-10">
+		<PostList />	
+	</div>
+		
+
+
+	<div class="relative">
 		<Footer />
 	</div>
 	

@@ -91,7 +91,7 @@
   
 </script>
   
-<div class="mt-40">
+<div>
     <main>
         <Navbar productId={JSON.parse( browser && localStorage.getItem('cart'))} />
         <div class="py-20 px-4">
